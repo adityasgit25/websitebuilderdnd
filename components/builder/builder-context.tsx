@@ -129,7 +129,12 @@ export function BuilderContextProvider({ children }: BuilderContextProviderProps
       prev.map(element => 
         element.id === id ? { 
           ...element, 
-          styles: { ...element.styles, ...styles } 
+          styles: { 
+            ...element.styles, 
+            ...Object.fromEntries(
+              Object.entries(styles).map(([key, value]) => [key, value || ""])
+            ) 
+          } 
         } : element
       )
     );
@@ -138,7 +143,12 @@ export function BuilderContextProvider({ children }: BuilderContextProviderProps
       setSelectedElement(prev => 
         prev ? { 
           ...prev, 
-          styles: { ...prev.styles, ...styles } 
+          styles: { 
+            ...prev.styles, 
+            ...Object.fromEntries(
+              Object.entries(styles).map(([key, value]) => [key, value || ""])
+            ) 
+          } 
         } : null
       );
     }
